@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:alquran_flutter/models/detail_surah.dart';
-import 'package:alquran_flutter/models/surah.dart';
+import 'package:alquran_flutter/app/data/models/detail_surah.dart';
+import 'package:alquran_flutter/app/data/models/surah.dart';
 import 'package:dio/dio.dart';
 
 void main() async {
