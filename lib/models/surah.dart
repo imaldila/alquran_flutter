@@ -1,4 +1,5 @@
 // API URL = https://api.quran.sutanlab.id/surah
+// Get all Surah
 
 import 'dart:convert';
 
