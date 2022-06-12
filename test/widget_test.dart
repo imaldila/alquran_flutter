@@ -19,12 +19,11 @@ void main() async {
 
   // print(resAnnas.data);
 
-  Map<String, dynamic> dataAnnas =
-      (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
+  var dataAnnas = (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
 
   // print(dataAnnas);
 
   // dari data api (raw data) -> Model
-  var annas = DetailSurah.fromJson(dataAnnas);
-  print(annas.verses![1].text!.arab);
+  DetailSurah annas = DetailSurah.fromJson(dataAnnas);
+  print(annas.verses![1].number!.inQuran);
 }
