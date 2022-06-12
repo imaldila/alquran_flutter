@@ -22,12 +22,15 @@ class IntroductionView extends GetView<IntroductionController> {
             const SizedBox(
               height: 16,
             ),
-            const Text(
-              'Sesibuk itukah kamu \n sampai belum membaca Al-Quran ?',
-              style: TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Text(
+                'Sesibuk itukah kamu sampai belum membaca Al-Quran ?',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 16,
