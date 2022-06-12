@@ -1,30 +1,30 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:alquran_flutter/models/detail_surah.dart';
+import 'package:alquran_flutter/models/surah.dart';
+import 'package:dio/dio.dart';
 
-import 'package:alquran_flutter/main.dart';
+void main() async {
+  var res = await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah");
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  List data = (json.decode(res.data) as Map<String, dynamic>)["data"];
+  // print(data);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  // dari data api (raw data) -> Model
+  Surah surahAnnas = Surah.fromJson(data[113]);
+  // print(surahAnnas.number);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  var resAnnas = await Dio().get(
+      "https://quran-api-afrizaloky.herokuapp.com/surah/${surahAnnas.number!}");
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  // print(resAnnas.data);
+
+  Map<String, dynamic> dataAnnas =
+      (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
+
+  // print(dataAnnas);
+
+  // dari data api (raw data) -> Model
+  var annas = DetailSurah.fromJson(dataAnnas);
+  print(annas.verses![1].text!.arab);
 }

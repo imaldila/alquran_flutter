@@ -248,12 +248,12 @@ class Verse {
       );
 
   Map<String, dynamic> toJson() => {
-        "number": number!.toJson(),
-        "meta": meta!.toJson(),
-        "text": text!.toJson(),
-        "translation": translation!.toJson(),
-        "audio": audio!.toJson(),
-        "tafsir": tafsir!.toJson(),
+        "number": number?.toJson(),
+        "meta": meta?.toJson(),
+        "text": text?.toJson(),
+        "translation": translation?.toJson(),
+        "audio": audio?.toJson(),
+        "tafsir": tafsir?.toJson(),
       };
 }
 
@@ -272,7 +272,7 @@ class Meta {
   int? manzil;
   int? ruku;
   int? hizbQuarter;
-  Sajda? sajda;
+  bool? sajda;
 
   factory Meta.fromJson(Map<String, dynamic> json) => Meta(
         juz: json["juz"],
@@ -280,7 +280,7 @@ class Meta {
         manzil: json["manzil"],
         ruku: json["ruku"],
         hizbQuarter: json["hizbQuarter"],
-        sajda: Sajda.fromJson(json["sajda"]),
+        sajda: json["sajda"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -289,29 +289,29 @@ class Meta {
         "manzil": manzil,
         "ruku": ruku,
         "hizbQuarter": hizbQuarter,
-        "sajda": sajda!.toJson(),
+        "sajda": sajda,
       };
 }
 
-class Sajda {
-  Sajda({
-    this.recommended,
-    this.obligatory,
-  });
+// class Sajda {
+//   Sajda({
+//     this.recommended,
+//     this.obligatory,
+//   });
 
-  bool? recommended;
-  bool? obligatory;
+//   bool? recommended;
+//   bool? obligatory;
 
-  factory Sajda.fromJson(Map<String, dynamic> json) => Sajda(
-        recommended: json["recommended"],
-        obligatory: json["obligatory"],
-      );
+//   factory Sajda.fromJson(Map<String, dynamic> json) => Sajda(
+//         recommended: json["recommended"],
+//         obligatory: json["obligatory"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "recommended": recommended,
-        "obligatory": obligatory,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "recommended": recommended,
+//         "obligatory": obligatory,
+//       };
+// }
 
 class Number {
   Number({
