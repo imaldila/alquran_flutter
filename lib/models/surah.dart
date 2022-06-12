@@ -1,6 +1,4 @@
-// To parse this JSON data, do
-//
-//     final surah = surahFromJson(jsonString);
+// API URL = https://api.quran.sutanlab.id/surah
 
 import 'dart:convert';
 
