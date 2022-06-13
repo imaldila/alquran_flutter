@@ -12,22 +12,23 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.INTRODUCTION,
-      page: () => IntroductionView(),
+      page: () => const IntroductionView(),
       binding: IntroductionBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_SURAH,
-      page: () => DetailSurahView(),
+      page: () => const DetailSurahView(),
       binding: DetailSurahBinding(),
     ),
   ];

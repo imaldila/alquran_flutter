@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:alquran_flutter/app/data/models/detail_surah.dart';
 import 'package:alquran_flutter/app/data/models/surah.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 void main() async {
   var res = await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah");
@@ -25,5 +26,7 @@ void main() async {
 
   // dari data api (raw data) -> Model
   DetailSurah annas = DetailSurah.fromJson(dataAnnas);
-  print(annas.verses![1].number!.inQuran);
+  if (kDebugMode) {
+    print(annas.verses![1].number!.inQuran);
+  }
 }

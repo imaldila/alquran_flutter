@@ -1,20 +1,17 @@
+import 'dart:convert';
+
+import 'package:alquran_flutter/app/data/models/detail_surah.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class DetailSurahController extends GetxController {
-  //TODO: Implement DetailSurahController
+  Future<DetailSurah> getDetailSurah(String id) async {
+    var res =
+        await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah/$id");
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+    Map<String, dynamic> data =
+        (json.decode(res.data) as Map<String, dynamic>)["data"];
+
+    return DetailSurah.fromJson(data);
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }
