@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/introduction_controller.dart';
 
 class IntroductionView extends GetView<IntroductionController> {
@@ -43,7 +44,7 @@ class IntroductionView extends GetView<IntroductionController> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.offAllNamed(Routes.HOME),
               child: const Text('Let Get Started'),
             ),
           ],

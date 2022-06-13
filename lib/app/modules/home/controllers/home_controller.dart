@@ -1,20 +1,21 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/surah.dart';
+
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+ Future<List<Surah>> getAllSurah() async {
+    var res =
+        await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah");
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+    List? data = (json.decode(res.data) as Map<String, dynamic>)["data"];
+
+    if (data == null || data.isEmpty) {
+      return [];
+    } else {
+      return data.map((e) => Surah.fromJson(e)).toList();
+    }
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }
