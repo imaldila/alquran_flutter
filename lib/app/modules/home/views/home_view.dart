@@ -109,6 +109,7 @@ class HomeView extends GetView<HomeController> {
                   indicatorColor: appPurpleDark2,
                   labelColor: appPurpleDark2,
                   unselectedLabelColor: appPurpleLight,
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
                   tabs: [
                     Tab(
                       text: 'Surah',
@@ -120,7 +121,22 @@ class HomeView extends GetView<HomeController> {
                       text: 'Bookmark',
                     ),
                   ],
-                )
+                ),
+                const Expanded(
+                  child: TabBarView(
+                    children: [
+                      Center(
+                        child: Text('Surah'),
+                      ),
+                      Center(
+                        child: Text('Juz'),
+                      ),
+                      Center(
+                        child: Text('Bookmark'),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
