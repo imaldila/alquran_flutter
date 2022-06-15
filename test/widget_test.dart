@@ -1,32 +1,45 @@
 import 'dart:convert';
 
-import 'package:alquran_flutter/app/data/models/detail_surah.dart';
-import 'package:alquran_flutter/app/data/models/surah.dart';
+import 'package:alquran_flutter/app/data/models/ayat.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 void main() async {
-  var res = await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah");
+  var res =
+      await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah/100/1");
 
-  List data = (json.decode(res.data) as Map<String, dynamic>)["data"];
-  // print(data);
+  var data = json.decode(res.data)['data'];
+  var dataToModel = {
+    "number": data['number'],
+    "meta": data['meta'],
+    "text": data['text'],
+    "translation": data['translation'],
+    "audio": data['audio'],
+    "tafsir": data['tafsir'],
+  };
 
-  // dari data api (raw data) -> Model
-  Surah surahAnnas = Surah.fromJson(data[113]);
-  // print(surahAnnas.number);
+  // Convert Map -> ke Model Ayat
+  Ayat ayat = Ayat.fromJson(dataToModel);
+  print(ayat);
 
-  var resAnnas = await Dio().get(
-      "https://quran-api-afrizaloky.herokuapp.com/surah/${surahAnnas.number!}");
+  // List data = (json.decode(res.data) as Map<String, dynamic>)["data"];
+  // // print(data);
 
-  // print(resAnnas.data);
+  // // dari data api (raw data) -> Model
+  // Surah surahAnnas = Surah.fromJson(data[113]);
+  // // print(surahAnnas.number);
 
-  var dataAnnas = (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
+  // var resAnnas = await Dio().get(
+  //     "https://quran-api-afrizaloky.herokuapp.com/surah/${surahAnnas.number!}");
 
-  // print(dataAnnas);
+  // // print(resAnnas.data);
 
-  // dari data api (raw data) -> Model
-  DetailSurah annas = DetailSurah.fromJson(dataAnnas);
-  if (kDebugMode) {
-    print(annas.verses![1].number!.inQuran);
-  }
+  // var dataAnnas = (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
+
+  // // print(dataAnnas);
+
+  // // dari data api (raw data) -> Model
+  // DetailSurah annas = DetailSurah.fromJson(dataAnnas);
+  // if (kDebugMode) {
+  //   print(annas.verses![1].number!.inQuran);
+  // }
 }
