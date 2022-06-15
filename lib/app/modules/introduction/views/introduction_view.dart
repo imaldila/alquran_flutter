@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../constants/constant.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/introduction_controller.dart';
 
@@ -18,7 +19,11 @@ class IntroductionView extends GetView<IntroductionController> {
           children: [
             const Text(
               'Al-Quran Apps',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: appPurple,
+              ),
             ),
             const SizedBox(
               height: 16,
@@ -29,6 +34,7 @@ class IntroductionView extends GetView<IntroductionController> {
                 'Sesibuk itukah kamu sampai belum membaca Al-Quran ?',
                 style: TextStyle(
                   fontSize: 16,
+                  color: Colors.grey,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -46,6 +52,9 @@ class IntroductionView extends GetView<IntroductionController> {
             ElevatedButton(
               onPressed: () => Get.offAllNamed(Routes.HOME),
               child: const Text('Let Get Started'),
+              style: ElevatedButton.styleFrom(
+                primary: appOrange,
+              ),
             ),
           ],
         ),
