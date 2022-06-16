@@ -145,14 +145,35 @@ class HomeView extends GetView<HomeController> {
                               return ListTile(
                                 onTap: () => Get.toNamed(Routes.DETAIL_SURAH,
                                     arguments: surah),
-                                leading: CircleAvatar(
-                                  child: Text('${surah.number}'),
+                                leading: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/img_octagonal.png'),
+                                        fit: BoxFit.contain),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '${surah.number}',
+                                      style:
+                                          const TextStyle(color: appPurpleDark),
+                                    ),
+                                  ),
                                 ),
                                 title: Text(
-                                    surah.name?.transliteration?.id ?? 'Error'),
+                                  surah.name?.transliteration?.id ?? 'Error',
+                                  style: const TextStyle(color: appPurpleDark),
+                                ),
                                 subtitle: Text(
-                                    '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}'),
-                                trailing: Text(surah.name?.short ?? '-'),
+                                  '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
+                                  style: const TextStyle(color: appPurpleLight),
+                                ),
+                                trailing: Text(
+                                  surah.name?.short ?? '-',
+                                  style: const TextStyle(color: appPurpleDark),
+                                ),
                               );
                             },
                           );
