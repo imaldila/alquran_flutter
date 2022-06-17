@@ -54,7 +54,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
             height: 20,
           ),
           FutureBuilder<detail.DetailSurah>(
-            future: controller.getDetailSurah(surah.number.toString()),
+            future: controller.getDetailSurah(surah.number!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
