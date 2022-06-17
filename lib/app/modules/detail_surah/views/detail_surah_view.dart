@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../constants/constant.dart';
 import '../../../data/models/surah.dart';
 import '../controllers/detail_surah_controller.dart';
 
@@ -31,7 +32,17 @@ class DetailSurahView extends GetView<DetailSurahController> {
                 textAlign: TextAlign.left,
               ),
             ),
-            child: Card(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  colors: [
+                    appPurpleDark2,
+                    appPurpleDark1,
+                  ],
+                ),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -41,6 +52,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        color: appWhite,
                       ),
                     ),
                     Text(
@@ -48,6 +60,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: appWhite,
                       ),
                     ),
                     const SizedBox(
@@ -55,7 +68,10 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     ),
                     Text(
                       '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: appWhite,
+                      ),
                     ),
                   ],
                 ),
@@ -84,7 +100,11 @@ class DetailSurahView extends GetView<DetailSurahController> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Card(
+                      Container(
+                        decoration: BoxDecoration(
+                          color: appPurpleLight.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
@@ -93,8 +113,19 @@ class DetailSurahView extends GetView<DetailSurahController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                child: Text('${index + 1}'),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/img_octagonal.png'),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text('${index + 1}'),
+                                ),
                               ),
                               Row(
                                 children: [
@@ -115,10 +146,13 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        verses?.text?.arab ?? 'Error',
-                        style: const TextStyle(fontSize: 25),
-                        textAlign: TextAlign.end,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Text(
+                          verses?.text?.arab ?? 'Error',
+                          style: const TextStyle(fontSize: 25),
+                          textAlign: TextAlign.end,
+                        ),
                       ),
                       const SizedBox(
                         height: 10,

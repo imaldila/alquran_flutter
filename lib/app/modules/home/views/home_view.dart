@@ -227,25 +227,28 @@ class HomeView extends GetView<HomeController> {
                                         fit: BoxFit.contain),
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style:
-                                          const TextStyle(color: appPurpleDark),
+                                    child: Obx(
+                                      () => Text(
+                                        '${index + 1}',
+                                        style: TextStyle(
+                                          color: controller.isDark.isTrue
+                                              ? appWhite
+                                              : appPurpleDark,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                                title: Text(
-                                  'Juz ${index + 1}',
-                                  style: const TextStyle(color: appPurpleDark),
+                                title: Obx(
+                                  () => Text(
+                                    'Juz ${index + 1}',
+                                    style: TextStyle(
+                                      color: controller.isDark.isTrue
+                                          ? appWhite
+                                          : appPurpleDark,
+                                    ),
+                                  ),
                                 ),
-                                // subtitle: Text(
-                                //   '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
-                                //   style: const TextStyle(color: appPurpleLight),
-                                // ),
-                                // trailing: Text(
-                                //   surah.name?.short ?? '-',
-                                //   style: const TextStyle(color: appPurpleDark),
-                                // ),
                               );
                             },
                           );
