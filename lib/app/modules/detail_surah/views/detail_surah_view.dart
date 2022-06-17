@@ -20,33 +20,45 @@ class DetailSurahView extends GetView<DetailSurahController> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Text(
-                    surah.name?.transliteration?.id ?? 'Error',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () => Get.defaultDialog(
+              titlePadding: const EdgeInsets.all(16),
+              title: 'Tafsir ${surah.name?.transliteration?.id ?? 'Error'}',
+              titleStyle: const TextStyle(fontSize: 20),
+              contentPadding: const EdgeInsets.all(16),
+              content: Text(
+                '${surah.tafsir?.id}',
+                textAlign: TextAlign.left,
+              ),
+            ),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      surah.name?.transliteration?.id ?? 'Error',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '( ${surah.name?.translation?.id ?? 'Error'} )',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      '( ${surah.name?.translation?.id ?? 'Error'} )',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

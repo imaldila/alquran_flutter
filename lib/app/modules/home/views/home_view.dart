@@ -26,7 +26,7 @@ class HomeView extends GetView<HomeController> {
         body: DefaultTabController(
           length: 3,
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -179,8 +179,58 @@ class HomeView extends GetView<HomeController> {
                           );
                         },
                       ),
-                      const Center(
-                        child: Text('Juz'),
+                      FutureBuilder<List<Surah>>(
+                        future: controller.getAllSurah(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          if (!snapshot.hasData) {
+                            return const Center(child: Text('Data not found'));
+                          }
+
+                          return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              Surah surah = snapshot.data![index];
+                              return ListTile(
+                                onTap: () => Get.toNamed(Routes.DETAIL_SURAH,
+                                    arguments: surah),
+                                leading: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/img_octagonal.png'),
+                                        fit: BoxFit.contain),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '${index + 1}',
+                                      style:
+                                          const TextStyle(color: appPurpleDark),
+                                    ),
+                                  ),
+                                ),
+                                title: Text(
+                                  'Juz ${index + 1}',
+                                  style: const TextStyle(color: appPurpleDark),
+                                ),
+                                // subtitle: Text(
+                                //   '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
+                                //   style: const TextStyle(color: appPurpleLight),
+                                // ),
+                                // trailing: Text(
+                                //   surah.name?.short ?? '-',
+                                //   style: const TextStyle(color: appPurpleDark),
+                                // ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       const Center(
                         child: Text('Bookmark'),
