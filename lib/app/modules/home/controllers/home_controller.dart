@@ -19,7 +19,7 @@ class HomeController extends GetxController {
 //   }
 
   final SurahRepository _surahRepository = SurahService();
-
+  RxBool isDark = false.obs;
   final RxList<Surah> _surah = <Surah>[].obs;
   List<Surah> get surah => _surah;
 

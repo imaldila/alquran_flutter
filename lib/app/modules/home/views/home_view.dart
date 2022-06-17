@@ -23,6 +23,18 @@ class HomeView extends GetView<HomeController> {
             )
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.isDarkMode
+                ? Get.changeTheme(themeLight)
+                : Get.changeTheme(themeDark);
+            controller.isDark.toggle();
+          },
+          child: Obx(
+            () => Icon(Icons.color_lens,
+                color: controller.isDark.isTrue ? appPurple : appWhite),
+          ),
+        ),
         body: DefaultTabController(
           length: 3,
           child: Padding(
@@ -107,10 +119,6 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const TabBar(
-                  indicatorColor: appPurpleDark2,
-                  labelColor: appPurpleDark2,
-                  unselectedLabelColor: appPurpleLight,
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
                   tabs: [
                     Tab(
                       text: 'Surah',
@@ -155,16 +163,27 @@ class HomeView extends GetView<HomeController> {
                                         fit: BoxFit.contain),
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      '${surah.number}',
-                                      style:
-                                          const TextStyle(color: appPurpleDark),
+                                    child: Obx(
+                                      () => Text(
+                                        '${surah.number}',
+                                        style: TextStyle(
+                                          color: controller.isDark.isTrue
+                                              ? appWhite
+                                              : appPurpleDark,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                                title: Text(
-                                  surah.name?.transliteration?.id ?? 'Error',
-                                  style: const TextStyle(color: appPurpleDark),
+                                title: Obx(
+                                  () => Text(
+                                    surah.name?.transliteration?.id ?? 'Error',
+                                    style: TextStyle(
+                                      color: controller.isDark.isTrue
+                                          ? appWhite
+                                          : appPurpleDark,
+                                    ),
+                                  ),
                                 ),
                                 subtitle: Text(
                                   '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}',
