@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../data/models/juz.dart' as juz;
 import '../../../data/models/surah.dart';
 import '../controllers/home_controller.dart';
 
@@ -198,8 +199,8 @@ class HomeView extends GetView<HomeController> {
                           );
                         },
                       ),
-                      FutureBuilder<List<Surah>>(
-                        future: controller.getAllSurah(),
+                      FutureBuilder<List<juz.Juz>>(
+                        future: controller.getAllJuz(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -213,10 +214,9 @@ class HomeView extends GetView<HomeController> {
                           return ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
-                              Surah surah = snapshot.data![index];
+                              juz.Juz detailJuz = snapshot.data![index];
                               return ListTile(
-                                onTap: () => Get.toNamed(Routes.DETAIL_SURAH,
-                                    arguments: surah),
+                                onTap: () {},
                                 leading: Container(
                                   height: 40,
                                   width: 40,
@@ -229,7 +229,7 @@ class HomeView extends GetView<HomeController> {
                                   child: Center(
                                     child: Obx(
                                       () => Text(
-                                        '${index + 1}',
+                                        '${detailJuz.juz}',
                                         style: TextStyle(
                                           color: controller.isDark.isTrue
                                               ? appWhite
@@ -241,7 +241,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 title: Obx(
                                   () => Text(
-                                    'Juz ${index + 1}',
+                                    'Juz ${detailJuz.juz}',
                                     style: TextStyle(
                                       color: controller.isDark.isTrue
                                           ? appWhite
@@ -249,6 +249,8 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                                 ),
+                                subtitle: Text(
+                                    '${detailJuz.juzStartInfo} -- ${detailJuz.juzEndInfo}'),
                               );
                             },
                           );

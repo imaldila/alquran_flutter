@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final ayat = ayatFromJson(jsonString);
-
 import 'dart:convert';
 
 Ayat ayatFromJson(String str) => Ayat.fromJson(json.decode(str));

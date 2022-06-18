@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'dart:developer' as dev;
 
 class NetworkDio {
   static Dio createDio() {
-    const String baseUrl = 'https://quran-api-afrizaloky.herokuapp.com';
+    const String baseUrl = 'https://quran-api-clone-one.vercel.app/';
     final option = BaseOptions(
       baseUrl: baseUrl,
       responseType: ResponseType.plain,
@@ -14,16 +12,16 @@ class NetworkDio {
     Dio dio = Dio(option);
     dio.interceptors.addAll(
       [
-        PrettyDioLogger(
-          request: true,
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-          responseBody: true,
-          logPrint: (val) {
-            dev.log(val.toString());
-          },
-        ),
+        // PrettyDioLogger(
+        //   request: true,
+        //   requestHeader: true,
+        //   requestBody: true,
+        //   responseHeader: true,
+        //   responseBody: true,
+        //   logPrint: (val) {
+        //     dev.log(val.toString());
+        //   },
+        // ),
       ],
     );
     return dio;
