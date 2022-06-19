@@ -130,7 +130,10 @@ class DetailSurahView extends GetView<DetailSurahController> {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller
+                                          .playAudio(verses?.audio?.primary);
+                                    },
                                     icon: const Icon(Icons.play_arrow),
                                   ),
                                   IconButton(

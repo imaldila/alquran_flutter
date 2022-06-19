@@ -17,6 +17,7 @@ void main() async {
       initialRoute: Routes.INTRODUCTION,
       getPages: AppPages.routes,
       theme: box.read('themeDark') == null ? themeLight : themeDark,
+      darkTheme: themeDark,
     ),
   );
 }

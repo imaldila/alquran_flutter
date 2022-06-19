@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alquran_flutter">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="alquran_flutter"
         android:name="${applicationName}"

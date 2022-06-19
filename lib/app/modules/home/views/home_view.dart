@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
           onPressed: () => controller.changeThemeMode(),
           child: Obx(
             () => Icon(Icons.color_lens,
-                color: controller.isDark.isTrue ? appPurple : appWhite),
+                color: controller.isDark.value == true ? appPurple : appWhite),
           ),
         ),
         body: DefaultTabController(
@@ -164,7 +164,7 @@ class HomeView extends GetView<HomeController> {
                                       () => Text(
                                         '${surah.number}',
                                         style: TextStyle(
-                                          color: controller.isDark.isTrue
+                                          color: controller.isDark.value == true
                                               ? appWhite
                                               : appPurpleDark,
                                         ),
@@ -176,7 +176,7 @@ class HomeView extends GetView<HomeController> {
                                   () => Text(
                                     surah.name?.transliteration?.id ?? 'Error',
                                     style: TextStyle(
-                                      color: controller.isDark.isTrue
+                                      color: controller.isDark.value == true
                                           ? appWhite
                                           : appPurpleDark,
                                     ),
@@ -230,7 +230,7 @@ class HomeView extends GetView<HomeController> {
                                       () => Text(
                                         '${index + 1}',
                                         style: TextStyle(
-                                          color: controller.isDark.isTrue
+                                          color: controller.isDark.value == true
                                               ? appWhite
                                               : appPurpleDark,
                                         ),
@@ -242,7 +242,7 @@ class HomeView extends GetView<HomeController> {
                                   () => Text(
                                     'Juz ${index + 1}',
                                     style: TextStyle(
-                                      color: controller.isDark.isTrue
+                                      color: controller.isDark.value == true
                                           ? appWhite
                                           : appPurpleDark,
                                     ),
@@ -256,96 +256,6 @@ class HomeView extends GetView<HomeController> {
                           );
                         },
                       ),
-                      // FutureBuilder<List<juz.Juz>>(
-                      //   future: controller.getAllJuz(),
-                      //   builder: (context, snapshot) {
-                      //     if (snapshot.connectionState ==
-                      //         ConnectionState.waiting) {
-                      //       return const Center(
-                      //           child: CircularProgressIndicator());
-                      //     }
-                      //     if (!snapshot.hasData) {
-                      //       return const Center(child: Text('Data not found'));
-                      //     }
-
-                      //     return ListView.builder(
-                      //       itemCount: snapshot.data!.length,
-                      //       itemBuilder: (context, index) {
-                      //         juz.Juz detailJuz = snapshot.data![index];
-
-                      //         String nameStart =
-                      //             detailJuz.juzStartInfo?.split(' - ').first ??
-                      //                 '';
-                      //         String nameEnd =
-                      //             detailJuz.juzEndInfo?.split(' - ').first ??
-                      //                 '';
-
-                      //         List<Surah> rawAllSurahInJuz = [];
-                      //         List<Surah> allSurahInJuz = [];
-
-                      //         for (Surah item in controller.surah) {
-                      //           rawAllSurahInJuz.add(item);
-                      //           if (item.name!.transliteration!.id == nameEnd) {
-                      //             break;
-                      //           }
-                      //         }
-                      //         for (Surah item
-                      //             in rawAllSurahInJuz.reversed.toList()) {
-                      //           allSurahInJuz.add(item);
-                      //           if (item.name!.transliteration!.id ==
-                      //               nameStart) {
-                      //             break;
-                      //           }
-                      //         }
-
-                      //         return ListTile(
-                      //           onTap: () => Get.toNamed(
-                      //             Routes.DETAIL_JUZ,
-                      //             arguments: {
-                      //               'juz': detailJuz,
-                      //               'surah': allSurahInJuz.reversed.toList(),
-                      //             },
-                      //           ),
-                      //           leading: Container(
-                      //             height: 40,
-                      //             width: 40,
-                      //             decoration: const BoxDecoration(
-                      //               image: DecorationImage(
-                      //                   image: AssetImage(
-                      //                       'assets/images/img_octagonal.png'),
-                      //                   fit: BoxFit.contain),
-                      //             ),
-                      //             child: Center(
-                      //               child: Obx(
-                      //                 () => Text(
-                      //                   '${detailJuz.juz}',
-                      //                   style: TextStyle(
-                      //                     color: controller.isDark.isTrue
-                      //                         ? appWhite
-                      //                         : appPurpleDark,
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //           title: Obx(
-                      //             () => Text(
-                      //               'Juz ${detailJuz.juz}',
-                      //               style: TextStyle(
-                      //                 color: controller.isDark.isTrue
-                      //                     ? appWhite
-                      //                     : appPurpleDark,
-                      //               ),
-                      //             ),
-                      //           ),
-                      //           subtitle: Text(
-                      //               '${detailJuz.juzStartInfo} | ${detailJuz.juzEndInfo}'),
-                      //         );
-                      //       },
-                      //     );
-                      //   },
-                      // ),
-
                       const Center(
                         child: Text('Bookmark'),
                       ),
