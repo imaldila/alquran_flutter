@@ -254,7 +254,7 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  '${dataMapPerJuz['start']['surah']} ${(dataMapPerJuz['start']['ayat'] as detail.Verse).number!.inSurah}  | ${dataMapPerJuz['end']['surah']} ${(dataMapPerJuz['end']['ayat'] as detail.Verse).number!.inSurah}',
+                                  '${(dataMapPerJuz['start']['surah'] as detail.DetailSurah).name!.transliteration!.id} ${(dataMapPerJuz['start']['ayat'] as detail.Verse).number!.inSurah}  | ${(dataMapPerJuz['end']['surah'] as detail.DetailSurah).name!.transliteration!.id} ${(dataMapPerJuz['end']['ayat'] as detail.Verse).number!.inSurah}',
                                 ),
                               );
                             },

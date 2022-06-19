@@ -40,7 +40,7 @@ class IntroductionView extends GetView<IntroductionController> {
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 42,
             ),
             SizedBox(
               height: 250,
@@ -48,6 +48,9 @@ class IntroductionView extends GetView<IntroductionController> {
               child: Lottie.asset(
                 'assets/lotties/animasi_quran.json',
               ),
+            ),
+            const SizedBox(
+              height: 16,
             ),
             ElevatedButton(
               onPressed: () => Get.offAllNamed(Routes.HOME),

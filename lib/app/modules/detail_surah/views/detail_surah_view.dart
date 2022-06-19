@@ -147,7 +147,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                         height: 20,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
+                        padding: const EdgeInsets.only(left: 16.0),
                         child: Text(
                           verses?.text?.arab ?? 'Error',
                           style: const TextStyle(fontSize: 25),
@@ -160,7 +160,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       Text(
                         verses?.text?.transliteration?.en ?? 'Error',
                         style: const TextStyle(
-                            fontSize: 18, fontStyle: FontStyle.italic),
+                            fontSize: 16, fontStyle: FontStyle.italic),
                         textAlign: TextAlign.end,
                       ),
                       const SizedBox(
@@ -169,7 +169,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       Text(
                         verses?.translation?.id ?? 'Error',
                         style: const TextStyle(fontSize: 16),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                       ),
                       const SizedBox(
                         height: 50,

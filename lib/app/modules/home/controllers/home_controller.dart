@@ -75,7 +75,7 @@ class HomeController extends GetxController {
         for (var ayat in data.verses!) {
           if (ayat.meta?.juz == juz) {
             penampungAyat.add({
-              'surah': data.name?.transliteration?.id ?? '',
+              'surah': data,
               'ayat': ayat,
             });
           } else {
@@ -88,7 +88,7 @@ class HomeController extends GetxController {
             juz++;
             penampungAyat = [];
             penampungAyat.add({
-              'surah': data.name?.transliteration?.id ?? '',
+              'surah': data,
               'ayat': ayat,
             });
           }

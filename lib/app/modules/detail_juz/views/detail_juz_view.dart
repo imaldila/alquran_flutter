@@ -29,9 +29,70 @@ class DetailJuzView extends GetView<DetailJuzController> {
             );
           }
           Map<String, dynamic> ayat = dataMapPerJuz['verses'][index];
+          detail.DetailSurah surah = ayat['surah'];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              if ((ayat['ayat'] as detail.Verse).number!.inSurah == 1)
+                GestureDetector(
+                  onTap: () => Get.defaultDialog(
+                    titlePadding: const EdgeInsets.all(16),
+                    title:
+                        'Tafsir ${surah.name?.transliteration?.id ?? 'Error'}',
+                    titleStyle: const TextStyle(fontSize: 20),
+                    contentPadding: const EdgeInsets.all(16),
+                    content: Text(
+                      '${surah.tafsir?.id}',
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  child: Container(
+                    width: Get.width,
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        colors: [
+                          appPurpleDark2,
+                          appPurpleDark1,
+                        ],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            '${surah.name!.transliteration!.id}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: appWhite,
+                            ),
+                          ),
+                          Text(
+                            '( ${surah.name?.translation?.id ?? 'Error'} )',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: appWhite,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? ''}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: appWhite,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               Container(
                 decoration: BoxDecoration(
                   color: appPurpleLight.withOpacity(0.3),
@@ -64,7 +125,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
                             ),
                           ),
                           Text(
-                            '${ayat['surah']}',
+                            '${surah.name!.transliteration!.id}',
                             style: const TextStyle(
                                 fontSize: 16, fontStyle: FontStyle.italic),
                           ),
@@ -90,7 +151,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 16.0),
+                padding: const EdgeInsets.only(left: 16.0),
                 child: Text(
                   (ayat['ayat'] as detail.Verse).text?.arab ?? 'Error',
                   style: const TextStyle(fontSize: 25),
@@ -104,7 +165,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
                 (ayat['ayat'] as detail.Verse).text?.transliteration?.en ??
                     'Error',
                 style:
-                    const TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                    const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                 textAlign: TextAlign.end,
               ),
               const SizedBox(
@@ -113,7 +174,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
               Text(
                 (ayat['ayat'] as detail.Verse).translation?.id ?? 'Error',
                 style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
               ),
               const SizedBox(
                 height: 50,
