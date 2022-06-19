@@ -47,7 +47,7 @@ class HomeController extends GetxController {
       try {
         var juz = await _juzRepository.getAllJuz(i);
         _allJuz.add(juz);
-        update();
+        // update();
       } catch (e) {
         if (kDebugMode) {
           print('error getJuz: $e');

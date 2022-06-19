@@ -31,19 +31,19 @@ class Juz {
     }
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = <String, dynamic>{};
-  //   data['juz'] = juz;
-  //   data['juzStartSurahNumber'] = juzStartSurahNumber;
-  //   data['juzEndSurahNumber'] = juzEndSurahNumber;
-  //   data['juzStartInfo'] = juzStartInfo;
-  //   data['juzEndInfo'] = juzEndInfo;
-  //   data['totalVerses'] = totalVerses;
-  //   if (verses != null) {
-  //     data['verses'] = verses!.map((v) => v.toJson()).toList();
-  //   }
-  //   return data;
-  // }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['juz'] = juz;
+    data['juzStartSurahNumber'] = juzStartSurahNumber;
+    data['juzEndSurahNumber'] = juzEndSurahNumber;
+    data['juzStartInfo'] = juzStartInfo;
+    data['juzEndInfo'] = juzEndInfo;
+    data['totalVerses'] = totalVerses;
+    if (verses != null) {
+      data['verses'] = verses!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
 class Verses {

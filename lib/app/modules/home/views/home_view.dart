@@ -229,7 +229,7 @@ class HomeView extends GetView<HomeController> {
                                   child: Center(
                                     child: Obx(
                                       () => Text(
-                                        '${detailJuz.juz}',
+                                        '${index + 1}',
                                         style: TextStyle(
                                           color: controller.isDark.isTrue
                                               ? appWhite
@@ -241,7 +241,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 title: Obx(
                                   () => Text(
-                                    'Juz ${detailJuz.juz}',
+                                    'Juz ${index + 1}',
                                     style: TextStyle(
                                       color: controller.isDark.isTrue
                                           ? appWhite
