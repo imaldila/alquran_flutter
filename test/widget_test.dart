@@ -1,45 +1,73 @@
-// import 'dart:convert';
+import 'package:alquran_flutter/app/data/models/detail_surah.dart';
+import 'package:dio/dio.dart';
 
-// import 'package:alquran_flutter/app/data/models/ayat.dart';
-// import 'package:dio/dio.dart';
+void main() async {
+  int juz = 1;
 
-// void main() async {
-//   var res =
-//       await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah/100/1");
+  List<Map<String, dynamic>> penampungAyat = [];
+  List<Map<String, dynamic>> allJuz = [];
 
-//   var data = json.decode(res.data)['data'];
-//   var dataToModel = {
-//     "number": data['number'],
-//     "meta": data['meta'],
-//     "text": data['text'],
-//     "translation": data['translation'],
-//     "audio": data['audio'],
-//     "tafsir": data['tafsir'],
-//   };
+  for (var i = 1; i < 114; i++) {
+    var res =
+        await Dio().get('https://quran-api-clone-one.vercel.app/surah/$i');
+    // Map<String, dynamic> rawData = json.decode(res.data)['data'];
+    DetailSurah data = DetailSurah.fromJson(res.data['data']);
 
-//   // Convert Map -> ke Model Ayat
-//   Ayat ayat = Ayat.fromJson(dataToModel);
-//   print(ayat);
-
-//   // List data = (json.decode(res.data) as Map<String, dynamic>)["data"];
-//   // // print(data);
-
-//   // // dari data api (raw data) -> Model
-//   // Surah surahAnnas = Surah.fromJson(data[113]);
-//   // // print(surahAnnas.number);
-
-//   // var resAnnas = await Dio().get(
-//   //     "https://quran-api-afrizaloky.herokuapp.com/surah/${surahAnnas.number!}");
-
-//   // // print(resAnnas.data);
-
-//   // var dataAnnas = (json.decode(resAnnas.data) as Map<String, dynamic>)["data"];
-
-//   // // print(dataAnnas);
-
-//   // // dari data api (raw data) -> Model
-//   // DetailSurah annas = DetailSurah.fromJson(dataAnnas);
-//   // if (kDebugMode) {
-//   //   print(annas.verses![1].number!.inQuran);
-//   // }
-// }
+    if (data.verses != null) {
+      for (var ayat in data.verses!) {
+        if (ayat.meta?.juz == juz) {
+          penampungAyat.add({
+            'surah': data.name?.transliteration?.id ?? '',
+            'ayat': ayat,
+          });
+        } else {
+          print('==========================');
+          print('Berhasil memasukan Juz $juz');
+          print('Start');
+          print(
+              'Ayat : ${(penampungAyat[0]['ayat'] as Verse).number?.inSurah}');
+          print('${(penampungAyat[0]['ayat'] as Verse).text?.arab}');
+          print('End');
+          print(
+              'Ayat : ${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).number?.inSurah}');
+          print(
+              '${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).text?.arab}');
+          allJuz.add({
+            'juz': juz,
+            'start': penampungAyat[0],
+            'end': penampungAyat[penampungAyat.length - 1],
+            'verses': penampungAyat,
+          });
+          juz++;
+          penampungAyat.clear();
+          penampungAyat.add({
+            'surah': data.name?.transliteration?.id ?? '',
+            'ayat': ayat,
+          });
+        }
+      }
+    }
+  }
+  print('==========================');
+  print('Berhasil memasukan Juz $juz');
+  print('Start');
+  print('Ayat : ${(penampungAyat[0]['ayat'] as Verse).number?.inSurah}');
+  print('${(penampungAyat[0]['ayat'] as Verse).text?.arab}');
+  print('End');
+  print(
+      'Ayat : ${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).number?.inSurah}');
+  print(
+      '${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).text?.arab}');
+  allJuz.add({
+    'juz': juz,
+    'start': penampungAyat[0],
+    'end': penampungAyat[penampungAyat.length - 1],
+    'verses': penampungAyat,
+  });
+  juz++;
+  penampungAyat.clear();
+  // penampungAyat.add({
+  //   'surah': data.name?.transliteration?.id ?? '',
+  //   'ayat': ayat,
+  // });
+}

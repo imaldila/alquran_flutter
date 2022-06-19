@@ -82,9 +82,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: () {
-                              print('play');
-                            },
+                            onPressed: () {},
                             icon: const Icon(Icons.play_arrow),
                           ),
                           IconButton(
