@@ -129,27 +129,25 @@ class DetailSurahView extends GetView<DetailSurahController> {
                               ),
                               Row(
                                 children: [
-                                  Obx(
-                                    () => Row(
+                                  GetBuilder<DetailSurahController>(
+                                    builder: (c) => Row(
                                       children: [
-                                        (controller.audioStatus.value == 'stop')
+                                        (verses?.audioStatus == 'stop')
                                             ? IconButton(
                                                 onPressed: () {
-                                                  controller.playAudio(
-                                                      verses?.audio?.primary);
+                                                  c.playAudio(verses!);
                                                 },
                                                 icon: const Icon(
                                                     Icons.play_arrow),
                                               )
                                             : Row(
                                                 children: [
-                                                  (controller.audioStatus
-                                                              .value ==
+                                                  (verses?.audioStatus ==
                                                           'playing')
                                                       ? IconButton(
                                                           onPressed: () {
-                                                            controller
-                                                                .pauseAudio();
+                                                            c.pauseAudio(
+                                                                verses!);
                                                           },
                                                           icon: const Icon(
                                                             Icons.pause,
@@ -157,8 +155,8 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                                         )
                                                       : IconButton(
                                                           onPressed: () {
-                                                            controller
-                                                                .resumeAudio();
+                                                            c.resumeAudio(
+                                                                verses!);
                                                           },
                                                           icon: const Icon(
                                                             Icons.play_arrow,
@@ -166,7 +164,8 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                                         ),
                                                   IconButton(
                                                     onPressed: () {
-                                                      controller.stopAudio();
+                                                      controller
+                                                          .stopAudio(verses!);
                                                     },
                                                     icon: const Icon(
                                                       Icons.stop,

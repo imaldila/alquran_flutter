@@ -6,7 +6,8 @@ import 'package:just_audio/just_audio.dart';
 
 class DetailSurahController extends GetxController {
   final player = AudioPlayer();
-  RxString audioStatus = 'stop'.obs;
+
+  Verse? lastVerse;
 
   final DetailSurahRepository _detailSurahRepository = DetailSurahService();
   final Rx<DetailSurah> _detailSurah = DetailSurah().obs;
@@ -25,31 +26,42 @@ class DetailSurahController extends GetxController {
     return _detailSurah.value;
   }
 
-  void stopAudio() async {
+  void stopAudio(Verse verse) async {
     await player.stop();
-    audioStatus.value = 'stop';
+    verse.audioStatus = 'stop';
+    update();
   }
 
-  void pauseAudio() async {
+  void pauseAudio(Verse verse) async {
     await player.pause();
-    audioStatus.value = 'pause';
+    verse.audioStatus = 'pause';
+    update();
   }
 
-  void resumeAudio() async {
-    audioStatus.value = 'playing';
+  void resumeAudio(Verse verse) async {
+    verse.audioStatus = 'playing';
+    update();
     await player.play();
-    audioStatus.value = 'stop';
+    verse.audioStatus = 'stop';
+    update();
   }
 
-  void playAudio(String? url) async {
-    if (url != null) {
+  void playAudio(Verse verse) async {
+    if (verse.audio?.primary != null) {
       try {
+        lastVerse ??= verse;
+        lastVerse!.audioStatus = 'stop';
+        lastVerse = verse;
+        lastVerse!.audioStatus = 'stop';
+        update();
         await player.stop();
-        await player.setUrl(url);
-        audioStatus.value = 'playing';
+        await player.setUrl(verse.audio!.primary!);
+        verse.audioStatus = 'playing';
+        update();
         await player.play();
-        audioStatus.value = 'stop';
+        verse.audioStatus = 'stop';
         await player.stop();
+        update();
       } on PlayerException catch (e) {
         Get.defaultDialog(
           title: e.code.toString(),
