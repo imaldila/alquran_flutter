@@ -15,9 +15,9 @@ class DetailJuzView extends GetView<DetailJuzController> {
 
   @override
   Widget build(BuildContext context) {
-    for (var element in allSurahInThisJuz) {
-      print(element.name!.transliteration!.id);
-    }
+    // for (var element in allSurahInThisJuz) {
+    //   print(element.name!.transliteration!.id);
+    // }
     return Scaffold(
       appBar: AppBar(
         title: Text('Juz ${detailJuz.juz}'),
@@ -29,6 +29,12 @@ class DetailJuzView extends GetView<DetailJuzController> {
         itemCount: detailJuz.verses?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           juz.Verses? verses = detailJuz.verses![index];
+
+          if (index != 0) {
+            if (verses.number?.inSurah == 1) {
+              controller.index++;
+            }
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -45,19 +51,33 @@ class DetailJuzView extends GetView<DetailJuzController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/img_octagonal.png'),
-                            fit: BoxFit.contain,
+                      Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 16),
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/img_octagonal.png'),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text('${verses.number?.inSurah ?? ''}'),
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: Text('${verses.number?.inSurah ?? ''}'),
-                        ),
+                          Text(
+                            allSurahInThisJuz[controller.index]
+                                    .name
+                                    ?.transliteration
+                                    ?.id ??
+                                '',
+                            style: const TextStyle(
+                                fontSize: 16, fontStyle: FontStyle.italic),
+                          ),
+                        ],
                       ),
                       Row(
                         children: [
