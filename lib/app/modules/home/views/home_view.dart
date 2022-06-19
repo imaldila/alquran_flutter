@@ -216,7 +216,8 @@ class HomeView extends GetView<HomeController> {
                             itemBuilder: (context, index) {
                               juz.Juz detailJuz = snapshot.data![index];
                               return ListTile(
-                                onTap: () {},
+                                onTap: () => Get.toNamed(Routes.DETAIL_JUZ,
+                                    arguments: detailJuz),
                                 leading: Container(
                                   height: 40,
                                   width: 40,
@@ -229,7 +230,7 @@ class HomeView extends GetView<HomeController> {
                                   child: Center(
                                     child: Obx(
                                       () => Text(
-                                        '${index + 1}',
+                                        '${detailJuz.juz}',
                                         style: TextStyle(
                                           color: controller.isDark.isTrue
                                               ? appWhite
@@ -241,7 +242,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 title: Obx(
                                   () => Text(
-                                    'Juz ${index + 1}',
+                                    'Juz ${detailJuz.juz}',
                                     style: TextStyle(
                                       color: controller.isDark.isTrue
                                           ? appWhite

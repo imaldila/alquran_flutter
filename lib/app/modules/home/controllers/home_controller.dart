@@ -43,15 +43,15 @@ class HomeController extends GetxController {
   }
 
   Future<List<Juz>> getAllJuz() async {
-    for (int i = 1; i <= 30; i++) {
-      try {
+    try {
+      for (int i = 1; i <= 30; i++) {
         var juz = await _juzRepository.getAllJuz(i);
         _allJuz.add(juz);
-        // update();
-      } catch (e) {
-        if (kDebugMode) {
-          print('error getJuz: $e');
-        }
+        update();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('error getJuz: $e');
       }
     }
     return _allJuz;
