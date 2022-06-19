@@ -129,12 +129,53 @@ class DetailSurahView extends GetView<DetailSurahController> {
                               ),
                               Row(
                                 children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      controller
-                                          .playAudio(verses?.audio?.primary);
-                                    },
-                                    icon: const Icon(Icons.play_arrow),
+                                  Obx(
+                                    () => Row(
+                                      children: [
+                                        (controller.audioStatus.value == 'stop')
+                                            ? IconButton(
+                                                onPressed: () {
+                                                  controller.playAudio(
+                                                      verses?.audio?.primary);
+                                                },
+                                                icon: const Icon(
+                                                    Icons.play_arrow),
+                                              )
+                                            : Row(
+                                                children: [
+                                                  (controller.audioStatus
+                                                              .value ==
+                                                          'playing')
+                                                      ? IconButton(
+                                                          onPressed: () {
+                                                            controller
+                                                                .pauseAudio();
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.pause,
+                                                          ),
+                                                        )
+                                                      : IconButton(
+                                                          onPressed: () {
+                                                            controller
+                                                                .resumeAudio();
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.play_arrow,
+                                                          ),
+                                                        ),
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      controller.stopAudio();
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.stop,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                      ],
+                                    ),
                                   ),
                                   IconButton(
                                     onPressed: () {},
