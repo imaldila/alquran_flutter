@@ -3,25 +3,14 @@ import 'package:alquran_flutter/repositories/surah_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../../../constants/constant.dart';
 import '../../../data/models/detail_surah.dart';
 import '../../../data/models/juz.dart';
 import '../../../data/models/surah.dart';
 
 class HomeController extends GetxController {
-//  Future<List<Surah>> getAllSurah() async {
-//     var res =
-//         await Dio().get("https://quran-api-afrizaloky.herokuapp.com/surah");
-
-//     List? data = (json.decode(res.data) as Map<String, dynamic>)["data"];
-
-//     if (data == null || data.isEmpty) {
-//       return [];
-//     } else {
-//       return data.map((e) => Surah.fromJson(e)).toList();
-//     }
-//   }
-
   final SurahRepository _surahRepository = SurahService();
   final JuzRepository _juzRepository = JuzService();
   RxBool isDark = false.obs;
@@ -30,6 +19,19 @@ class HomeController extends GetxController {
 
   final RxList<Juz> _allJuz = <Juz>[].obs;
   List<Juz> get allJuz => _allJuz;
+
+  void changeThemeMode() async {
+    Get.isDarkMode ? Get.changeTheme(themeLight) : Get.changeTheme(themeDark);
+    isDark.toggle();
+
+    final box = GetStorage();
+
+    if(Get.isDarkMode){
+      box.remove('themeDark');
+    } else {
+      box.write('themeDark', true);
+    }
+  }
 
   Future<List<Surah>> getAllSurah() async {
     try {

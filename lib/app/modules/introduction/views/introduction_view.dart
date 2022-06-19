@@ -42,11 +42,14 @@ class IntroductionView extends GetView<IntroductionController> {
             const SizedBox(
               height: 42,
             ),
-            SizedBox(
-              height: 250,
-              width: 250,
-              child: Lottie.asset(
-                'assets/lotties/animasi_quran.json',
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: SizedBox(
+                height: 250,
+                width: 250,
+                child: Lottie.asset(
+                  'assets/lotties/animasi_quran.json',
+                ),
               ),
             ),
             const SizedBox(
