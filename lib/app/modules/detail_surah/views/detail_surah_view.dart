@@ -176,6 +176,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                       ],
                                     ),
                                   ),
+                                 
                                   IconButton(
                                     onPressed: () {},
                                     icon: const Icon(Icons.bookmark_border),
