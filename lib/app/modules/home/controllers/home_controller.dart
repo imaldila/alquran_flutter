@@ -86,7 +86,7 @@ class HomeController extends GetxController {
               'verses': penampungAyat,
             });
             juz++;
-            penampungAyat.clear();
+            penampungAyat = [];
             penampungAyat.add({
               'surah': data.name?.transliteration?.id ?? '',
               'ayat': ayat,

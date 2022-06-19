@@ -1,40 +1,34 @@
-import 'package:alquran_flutter/app/data/models/juz.dart' as juz;
-import 'package:alquran_flutter/app/data/models/surah.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../../../../constants/constant.dart';
+import '../../../data/models/detail_surah.dart' as detail;
 import '../controllers/detail_juz_controller.dart';
 
 class DetailJuzView extends GetView<DetailJuzController> {
   DetailJuzView({Key? key}) : super(key: key);
 
-  final juz.Juz detailJuz = Get.arguments['juz'];
-  final List<Surah> allSurahInThisJuz = Get.arguments['surah'];
+  final Map<String, dynamic> dataMapPerJuz = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    // for (var element in allSurahInThisJuz) {
-    //   print(element.name!.transliteration!.id);
-    // }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Juz ${detailJuz.juz}'),
+        title: Text('Juz ${dataMapPerJuz['juz']}'),
         centerTitle: true,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(20),
         shrinkWrap: true,
-        itemCount: detailJuz.verses?.length ?? 0,
+        itemCount: (dataMapPerJuz['verses'] as List).length,
         itemBuilder: (BuildContext context, int index) {
-          juz.Verses? verses = detailJuz.verses![index];
-
-          if (index != 0) {
-            if (verses.number?.inSurah == 1) {
-              controller.index++;
-            }
+          if ((dataMapPerJuz['verses'] as List).isEmpty) {
+            return const Center(
+              child: Text('No Data'),
+            );
           }
+          Map<String, dynamic> ayat = dataMapPerJuz['verses'][index];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -65,15 +59,12 @@ class DetailJuzView extends GetView<DetailJuzController> {
                               ),
                             ),
                             child: Center(
-                              child: Text('${verses.number?.inSurah ?? ''}'),
+                              child: Text(
+                                  '${(ayat['ayat'] as detail.Verse).number?.inSurah ?? ''}'),
                             ),
                           ),
                           Text(
-                            allSurahInThisJuz[controller.index]
-                                    .name
-                                    ?.transliteration
-                                    ?.id ??
-                                '',
+                            '${ayat['surah']}',
                             style: const TextStyle(
                                 fontSize: 16, fontStyle: FontStyle.italic),
                           ),
@@ -101,7 +92,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
                 child: Text(
-                  verses.text?.arab ?? 'Error',
+                  (ayat['ayat'] as detail.Verse).text?.arab ?? 'Error',
                   style: const TextStyle(fontSize: 25),
                   textAlign: TextAlign.end,
                 ),
@@ -110,7 +101,8 @@ class DetailJuzView extends GetView<DetailJuzController> {
                 height: 10,
               ),
               Text(
-                verses.text?.transliteration?.en ?? 'Error',
+                (ayat['ayat'] as detail.Verse).text?.transliteration?.en ??
+                    'Error',
                 style:
                     const TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                 textAlign: TextAlign.end,
@@ -119,7 +111,7 @@ class DetailJuzView extends GetView<DetailJuzController> {
                 height: 20,
               ),
               Text(
-                verses.translation?.id ?? 'Error',
+                (ayat['ayat'] as detail.Verse).translation?.id ?? 'Error',
                 style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.justify,
               ),
