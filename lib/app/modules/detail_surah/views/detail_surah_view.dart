@@ -132,6 +132,42 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                   GetBuilder<DetailSurahController>(
                                     builder: (c) => Row(
                                       children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            Get.defaultDialog(
+                                              title: 'BOOKMARK',
+                                              middleText:
+                                                  'Pilih jenis bookmark',
+                                              actions: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    c.addBookmark(
+                                                        true, snapshot.data!, verses!, index);
+                                                  },
+                                                  child:
+                                                      const Text('LAST READ'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: appPurple,
+                                                  ),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    c.addBookmark(
+                                                        false, snapshot.data!, verses!, index);
+                                                  },
+                                                  child: const Text('BOOKMARK'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: appPurple,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                          icon:
+                                              const Icon(Icons.bookmark_border),
+                                        ),
                                         (verses?.audioStatus == 'stop')
                                             ? IconButton(
                                                 onPressed: () {
@@ -175,11 +211,6 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                               )
                                       ],
                                     ),
-                                  ),
-                                 
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.bookmark_border),
                                   ),
                                 ],
                               )

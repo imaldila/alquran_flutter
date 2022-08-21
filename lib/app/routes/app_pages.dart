@@ -39,12 +39,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SEARCH,
-      page: () => SearchView(),
+      page: () => const SearchView(),
       binding: SearchBinding(),
     ),
     GetPage(
       name: _Paths.LAST_READ,
-      page: () => LastReadView(),
+      page: () => const LastReadView(),
       binding: LastReadBinding(),
     ),
     GetPage(

@@ -25,7 +25,6 @@ class DetailJuzView extends GetView<DetailJuzController> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: (dataMapPerJuz['verses'] as List).length,
           itemBuilder: (BuildContext context, int index) {
-            print(index);
             if ((dataMapPerJuz['verses'] as List).isEmpty) {
               return const Center(
                 child: Text('No Data'),
